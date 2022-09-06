@@ -1,0 +1,61 @@
+application {
+    config {
+    baseName gateway,
+    packageName com.example.developer.gateway,
+    applicationType gateway,
+    authenticationType oauth2,
+    prodDatabaseType postgresql,
+    serviceDiscoveryType eureka,
+    testFrameworks []
+    }
+    entities Store, StoreAlert
+}
+
+application {
+    config {
+    baseName store,
+    packageName com.example.developer.store,
+    applicationType microservice,
+    authenticationType oauth2,
+    prodDatabaseType postgresql,
+    serverPort 8082,
+    serviceDiscoveryType eureka
+    messageBroker kafka
+    }
+    entities Store
+}
+
+application {
+    config {
+    baseName alert,
+    packageName com.example.developer.alert,
+    applicationType microservice,
+    authenticationType oauth2,
+    serverPort 8083,
+    serviceDiscoveryType eureka
+    messageBroker kafka
+    }
+    entities StoreAlert
+}
+
+enum StoreStatus {
+OPEN,
+CLOSED
+}
+
+entity Store {
+name String required,
+address String required,
+status StoreStatus,
+createTimestamp Instant required,
+updateTimestamp Instant
+}
+
+entity StoreAlert {
+storeName String required,
+storeStatus String required,
+timestamp Instant required
+}
+
+microservice Store with store
+microservice StoreAlert with alert
