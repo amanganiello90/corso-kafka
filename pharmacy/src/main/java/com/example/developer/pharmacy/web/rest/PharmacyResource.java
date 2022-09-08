@@ -62,7 +62,7 @@ public class PharmacyResource {
         PharmacyDTO result = pharmacyService.save(pharmacyDTO);
         
         // send message
-        kafkaPharmAlertProducerService.storeAlertStatus(pharmacyDTO);
+        kafkaPharmAlertProducerService.pharmacyAlertStatus(pharmacyDTO);
         //
         return ResponseEntity
             .created(new URI("/api/pharmacies/" + result.getId()))

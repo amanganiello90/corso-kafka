@@ -41,7 +41,7 @@ public class KafkaPharmAlertProducerService {
      *
      * @param store the entity to send message.
      */
-    public void storeAlertStatus(PharmacyDTO pharmacyDTO) {
+    public void pharmacyAlertStatus(PharmacyDTO pharmacyDTO) {
         
     	PharmacyAlertDTO pharmacyAlertDTO = new PharmacyAlertDTO(pharmacyDTO);
         log.debug("Build message pharmacyAlertDTO of previous saved store entity : {}", pharmacyAlertDTO);

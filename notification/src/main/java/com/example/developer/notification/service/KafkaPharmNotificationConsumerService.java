@@ -36,10 +36,10 @@ public class KafkaPharmNotificationConsumerService {
     /**
      * consume a pharmacy message to save related entity 
      *
-     * @param store the entity to send message.
+     * @param notificationDTO from entity that sends message.
      */
     @StreamListener(value = KafkaPharmNotificationConsumer.CHANNELNAME, copyHeaders = "false")
-    public void consumeStoreAlertSave(Message<NotificationDTO> message) {
+    public void consumePharmacyAlertSave(Message<NotificationDTO> message) {
     	NotificationDTO notificationDTO = message.getPayload();
         log.debug("consuming message notificationDTO to persist entity : {}", notificationDTO);
         if (notificationDTO.getId() != null) {

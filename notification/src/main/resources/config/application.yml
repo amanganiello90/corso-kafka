@@ -133,6 +133,7 @@ spring:
         binder:
           replicationFactor: 1
           auto-create-topics: true
+        # auto-offset-reset : earliest
           brokers: localhost:9092
       bindings:
         binding-in-sse:
