@@ -8,13 +8,13 @@ application {
     serviceDiscoveryType eureka,
     testFrameworks []
     }
-    entities Store, StoreAlert
+    entities Pharmacy, AlertMess, Notification
 }
 
 application {
     config {
-    baseName store,
-    packageName com.example.developer.store,
+    baseName pharmacy,
+    packageName com.example.developer.pharmacy,
     applicationType microservice,
     authenticationType oauth2,
     prodDatabaseType postgresql,
@@ -22,7 +22,9 @@ application {
     serviceDiscoveryType eureka
     messageBroker kafka
     }
-    entities Store
+    entities Pharmacy
+    dto * with mapstruct
+    service * with serviceClass
 }
 
 application {
@@ -35,27 +37,50 @@ application {
     serviceDiscoveryType eureka
     messageBroker kafka
     }
-    entities StoreAlert
+    entities AlertMess
+    dto * with mapstruct
+    service * with serviceClass
 }
 
-enum StoreStatus {
+application {
+    config {
+    baseName notification,
+    packageName com.example.developer.notification,
+    applicationType microservice,
+    authenticationType oauth2,
+    serverPort 8084,
+    serviceDiscoveryType eureka
+    messageBroker kafka
+    }
+    entities Notification
+    dto * with mapstruct
+    service * with serviceClass
+}
+
+enum PharmacyStatus {
 OPEN,
 CLOSED
 }
 
-entity Store {
+entity Pharmacy {
 name String required,
 address String required,
-status StoreStatus,
+status PharmacyStatus,
 createTimestamp Instant required,
 updateTimestamp Instant
 }
 
-entity StoreAlert {
-storeName String required,
-storeStatus String required,
+entity AlertMess {
+pharmacyName String required,
+pharmacyStatus String required,
 timestamp Instant required
 }
 
-microservice Store with store
-microservice StoreAlert with alert
+entity Notification {
+pharmacyName String required,
+notificatedTimestamp Instant required
+}
+
+microservice Pharmacy with pharmacy
+microservice AlertMess with alert
+microservice Notification with notification
