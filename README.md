@@ -98,15 +98,15 @@ jhipster import-jdl stack
 2. Lancia i servizi dockerizzati per keycloak, kafka e jhipster registry, da qualsiasi folder di microservizio generato:
 
 ```
-docker-compose -f src/main/docker/keycloak.yml up -f
+docker-compose -f src/main/docker/keycloak.yml up -d
 ```
 
 ```
-docker-compose -f src/main/docker/jhipster-registry.yml up -f
+docker-compose -f src/main/docker/jhipster-registry.yml up -d
 ```
 
 ```
-docker-compose -f src/main/docker/kafka.yml up -f
+docker-compose -f src/main/docker/kafka.yml up -d
 ```
 
 3. Esegui il run per ogni progetto, aprendo una differente shell dei comandi in ciascuna folder:
